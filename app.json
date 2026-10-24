@@ -23,6 +23,7 @@
       "bundler": "metro",
       "output": "static",
       "homepage": "https://git-hub-2203.github.io/P2_PDM",
+      "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",
