@@ -22,7 +22,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "homepage": "https://git-hub-2203.github.io/P2_PDM",
+      "homepage": "https://git-hub-2203.github.io/P2_PDM/",
       "favicon": "./assets/fonts/images/favicon.png"
     },
     "plugins": [
