@@ -7,9 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "web": {
-      "homepage": "https://git-hub-2203.github.io/P2_PDM"
-    }
     "ios": {
       "supportsTablet": true
     },
@@ -24,7 +21,8 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "server",
+      "output": "static",
+      "homepage": "https://git-hub-2203.github.io/P2_PDM",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
