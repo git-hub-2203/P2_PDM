@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useLocalSearchParams, router } from 'expo-router';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { LIPProducts } from '../../constants/Products';
+import FallbackIcon from '@/components/FallbackIcon';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LIPaddProductToCart } from '@/constants/cart';
 import { showAlert } from '@/lib/alert';
@@ -46,11 +45,11 @@ export default function LIPProductDetail() {
           <Image source={{ uri: LIPprodutoAtual.LIPimage }} style={styles.imagemProduto} />
           
           <TouchableOpacity style={styles.botaoVoltar} onPress={() => router.back()}>
-            <AntDesign name="left" size={20} color="#000" />
+            <FallbackIcon name="left" size={20} color="#000" />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.botaoFavorito}>
-            <Ionicons name="heart-outline" size={22} color="#000" />
+            <FallbackIcon name="heart-outline" size={22} color="#000" />
           </TouchableOpacity>
         </View>
 
@@ -62,7 +61,7 @@ export default function LIPProductDetail() {
             </View>
 
             <View style={styles.containerAvaliacao}>
-              <AntDesign name="star" size={18} color="#FF9500" />
+              <FallbackIcon name="star" size={18} color="#FF9500" />
               <Text style={styles.textoAvaliacao}>4.8 <Text style={styles.textoQtdAvaliacao}>(230)</Text></Text>
             </View>
           </View>

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
+import FallbackIcon from '@/components/FallbackIcon';
 import { LIPCartItem, LIPloadCart, LIPsaveCart } from '@/constants/cart';
 import { showAlert } from '@/lib/alert';
 
@@ -111,7 +111,7 @@ export default function LIPCartScreen() {
                   onPress={() => LIPremoveItem(LIPitem.LIPid, LIPitem.LIPSsize)}
                   style={styles.btnRemove}
                 >
-                  <Entypo name="trash" size={24} color="#e03131" />
+                  <FallbackIcon name="trash" size={24} color="#e03131" />
                 </TouchableOpacity>
 
                 <Text style={styles.itemPrice}>

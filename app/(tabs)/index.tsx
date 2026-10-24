@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, StyleSheet, ScrollView, TextInput, TouchableOpacity, Image, Text } from 'react-native';
 import CardProdutos from '@/components/CardProdutos';
-import { Ionicons } from '@expo/vector-icons';
+import FallbackIcon from '@/components/FallbackIcon';
 import { useState, useCallback, useMemo } from 'react';
 import { LIPProducts } from '@/constants/Products';
 import { useFocusEffect } from 'expo-router';
@@ -79,7 +79,7 @@ export default function App() {
 
       <View style={styles.containerPesquisa}>
         <View style={styles.caixaInput}>
-          <Ionicons name="search" size={20} color="#999" style={styles.iconeBusca} />
+          <FallbackIcon name="search" size={20} color="#999" style={styles.iconeBusca} />
           <TextInput
             style={styles.input}
             placeholder="Pesquisar roupa..."
@@ -100,7 +100,7 @@ export default function App() {
               : 'Ordenar por preço crescente'
           }
         >
-          <Ionicons name="swap-vertical" size={24} color="#fff" />
+          <FallbackIcon name="swap-vertical" size={24} color="#fff" />
         </TouchableOpacity>
       </View>
 

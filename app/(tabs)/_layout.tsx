@@ -1,6 +1,5 @@
-import AntDesign from '@expo/vector-icons/AntDesign';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
+import FallbackIcon from '@/components/FallbackIcon';
 
 export default function TabLayoutLIP() {
   return (
@@ -25,9 +24,8 @@ export default function TabLayoutLIP() {
           title: 'Catálogo',
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <AntDesign name="home" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
+            <FallbackIcon name="home" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
           ),
-
         }}
       />
 
@@ -36,7 +34,7 @@ export default function TabLayoutLIP() {
         options={{
           title: 'Carrinho',
           tabBarIcon: ({ color }) => (
-            <AntDesign name="shopping-cart" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
+            <FallbackIcon name="shopping-cart" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
           ),
         }}
       />
@@ -46,7 +44,7 @@ export default function TabLayoutLIP() {
         options={{
           title: 'Perfil',
           tabBarIcon: ({ color }) => (
-            <Ionicons name="person" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
+            <FallbackIcon name="person" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
           ),
         }}
       />

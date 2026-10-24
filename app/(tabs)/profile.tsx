@@ -1,7 +1,6 @@
 import { StyleSheet, TouchableOpacity, Image, Text, View } from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import Feather from '@expo/vector-icons/Feather';
 import { showAlert } from '@/lib/alert';
+import FallbackIcon from '@/components/FallbackIcon';
 import { useState, useCallback } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '@/constants/Colors';
@@ -110,33 +109,33 @@ export default function TabThreeScreenLIP() {
 
       <View style={styles.caixa3}>
         <View style={styles.caixaItem}>
-          <Feather name="map" size={24} color="black" />
+          <FallbackIcon name="map" size={24} color="black" />
           <Text style={styles.texto}>Endereço</Text>
           <Text style={styles.detalheItem} numberOfLines={1}>
             {LIPperfilUsuario?.endereco || 'Não informado'}
           </Text>
           <View style={styles.padding1}>
             <TouchableOpacity onPress={() => router.push('/edit1')}>
-              <AntDesign name="caret-right" size={24} color="black" />
+              <FallbackIcon name="caret-right" size={24} color="black" />
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.caixaItem}>
-          <AntDesign name="phone" size={24} color="black" />
+          <FallbackIcon name="phone" size={24} color="black" />
           <Text style={styles.texto}>Telefone</Text>
           <Text style={styles.detalheItem} numberOfLines={1}>
             {LIPperfilUsuario?.telefone || 'Não informado'}
           </Text>
           <View style={styles.padding2}>
             <TouchableOpacity onPress={() => router.push('/edit2')}>
-              <AntDesign name="caret-right" size={24} color="black" />
+              <FallbackIcon name="caret-right" size={24} color="black" />
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.caixaItem}>
-          <AntDesign name="credit-card" size={24} color="black" />
+          <FallbackIcon name="credit-card" size={24} color="black" />
           <Text style={styles.texto}>Pagamento</Text>
           <Text style={styles.detalheItem}>
             {LIPperfilUsuario?.cartaoFinal
@@ -145,7 +144,7 @@ export default function TabThreeScreenLIP() {
           </Text>
           <View style={styles.padding3}>
             <TouchableOpacity onPress={() => router.push('/edit3')}>
-              <AntDesign name="caret-right" size={24} color="black" />
+              <FallbackIcon name="caret-right" size={24} color="black" />
             </TouchableOpacity>
           </View>
         </View>
