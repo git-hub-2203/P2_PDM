@@ -6,7 +6,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { LIPatualizarPerfil, LIPobterPerfil } from '@/constants/userStore';
 
 export default function LIPedit1() {
-  const { session } = useAuth();
+  const { session: LIPsession } = useAuth();
   const [LIPendnovo, setLIPendnovo] = useState<string>('');
   const [LIPendatual, setLIPendatual] = useState<string>('');
 
@@ -14,7 +14,7 @@ export default function LIPedit1() {
     useCallback(() => {
       async function LIPcarregarEndereco() {
         try {
-          const LIPperfil = session ? await LIPobterPerfil(session) : null;
+          const LIPperfil = LIPsession ? await LIPobterPerfil(LIPsession) : null;
           setLIPendatual(LIPperfil?.endereco ?? '');
         } catch (error) {
           console.error('Erro ao carregar endereço:', error);
@@ -23,7 +23,7 @@ export default function LIPedit1() {
       }
 
       LIPcarregarEndereco();
-    }, [session])
+    }, [LIPsession])
   );
 
   const LIPnovoend = async () => {
@@ -34,10 +34,10 @@ export default function LIPedit1() {
     }
 
     try {
-      if (!session) {
+      if (!LIPsession) {
         throw new Error('É necessário entrar na conta para atualizar o endereço.');
       }
-      await LIPatualizarPerfil(session, { endereco: LIPenderecoLimpo });
+      await LIPatualizarPerfil(LIPsession, { endereco: LIPenderecoLimpo });
       setLIPendatual(LIPenderecoLimpo);
       setLIPendnovo('');
       showAlert('Sucesso', 'Endereço salvo com sucesso!');
@@ -48,13 +48,13 @@ export default function LIPedit1() {
   };
 
   return (
-    <View style={styles.containersuperior}>
-      <View style={styles.xd2}>
-        <Text style={styles.texto}>Endereço Atual:</Text>
+    <View style={LIPstyles.containersuperior}>
+      <View style={LIPstyles.xd2}>
+        <Text style={LIPstyles.texto}>Endereço Atual:</Text>
         <Text style={{ flex: 1, flexWrap: 'wrap' }}>{LIPendatual}</Text>
       </View>
-      <View style={styles.xd2}>
-        <Text style={styles.texto}>Alterar endereço:</Text>
+      <View style={LIPstyles.xd2}>
+        <Text style={LIPstyles.texto}>Alterar endereço:</Text>
         <TextInput
           onChangeText={setLIPendnovo}
           value={LIPendnovo}
@@ -63,16 +63,16 @@ export default function LIPedit1() {
           style={{ flex: 1 }}
         />
       </View>
-      <View style={styles.botaoxd}>
-        <TouchableOpacity onPress={LIPnovoend} style={styles.botao}>
-          <Text style={styles.textobotao}>Salvar Endereço</Text>
+      <View style={LIPstyles.botaoxd}>
+        <TouchableOpacity onPress={LIPnovoend} style={LIPstyles.botao}>
+          <Text style={LIPstyles.textobotao}>Salvar Endereço</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const LIPstyles = StyleSheet.create({
   texto: {
     fontSize: 15,
     marginRight: 30,

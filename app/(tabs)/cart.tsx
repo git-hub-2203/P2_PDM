@@ -69,69 +69,69 @@ export default function LIPCartScreen() {
     }
   };
 
-  const total = LIPcartItems.reduce((sum, LIPitem) => sum + LIPitem.LIPprice * LIPitem.LIPqnt, 0);
+  const LIPtotal = LIPcartItems.reduce((LIPsum, LIPitem) => LIPsum + LIPitem.LIPprice * LIPitem.LIPqnt, 0);
 
   return (
-    <View style={styles.container}>
+    <View style={LIPstyles.container}>
       {LIPcartItems.length === 0 ? (
-        <View style={styles.ContainerVazio}>
-          <Text style={styles.TextVazio}>O seu carrinho está vazio. Vá ao catálogo para enchê-lo.</Text>
+        <View style={LIPstyles.ContainerVazio}>
+          <Text style={LIPstyles.TextVazio}>O seu carrinho está vazio. Vá ao catálogo para enchê-lo.</Text>
         </View>
       ) : (
         <>
           <FlatList
             data={LIPcartItems}
             keyExtractor={(LIPitem) => `${LIPitem.LIPid}-${LIPitem.LIPSsize ?? 'M'}`}
-            contentContainerStyle={styles.listContent}
+            contentContainerStyle={LIPstyles.listContent}
             renderItem={({ item: LIPitem }) => (
-              <View style={styles.card}>
-                <Image source={{ uri: LIPitem.LIPimage }} style={styles.image} />
-                <View style={styles.info}>
-                  <Text style={styles.itemName}>{LIPitem.LIPname}</Text>
-                  <Text style={styles.itemSize}>Tam: {LIPitem.LIPSsize || 'M'}</Text>
+              <View style={LIPstyles.card}>
+                <Image source={{ uri: LIPitem.LIPimage }} style={LIPstyles.image} />
+                <View style={LIPstyles.info}>
+                  <Text style={LIPstyles.itemName}>{LIPitem.LIPname}</Text>
+                  <Text style={LIPstyles.itemSize}>Tam: {LIPitem.LIPSsize || 'M'}</Text>
 
-                  <View style={styles.controls}>
+                  <View style={LIPstyles.controls}>
                     <TouchableOpacity
                       onPress={() => LIPupdateQuantity(LIPitem.LIPid, LIPitem.LIPSsize, -1)}
-                      style={styles.btnQty}
+                      style={LIPstyles.btnQty}
                     >
-                      <Text style={styles.btnText}>-</Text>
+                      <Text style={LIPstyles.btnText}>-</Text>
                     </TouchableOpacity>
-                    <Text style={styles.qtyText}>{LIPitem.LIPqnt}</Text>
+                    <Text style={LIPstyles.qtyText}>{LIPitem.LIPqnt}</Text>
                     <TouchableOpacity
                       onPress={() => LIPupdateQuantity(LIPitem.LIPid, LIPitem.LIPSsize, 1)}
-                      style={styles.btnQty}
+                      style={LIPstyles.btnQty}
                     >
-                      <Text style={styles.btnText}>+</Text>
+                      <Text style={LIPstyles.btnText}>+</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
 
                 <TouchableOpacity
                   onPress={() => LIPremoveItem(LIPitem.LIPid, LIPitem.LIPSsize)}
-                  style={styles.btnRemove}
+                  style={LIPstyles.btnRemove}
                 >
                   <FallbackIcon name="trash" size={24} color="#e03131" />
                 </TouchableOpacity>
 
-                <Text style={styles.itemPrice}>
+                <Text style={LIPstyles.itemPrice}>
                   R$ {(LIPitem.LIPprice * LIPitem.LIPqnt).toFixed(2)}
                 </Text>
               </View>
             )}
           />
 
-          <View style={styles.footer}>
-            <View style={styles.totallinha}>
-              <Text style={styles.totalLabel}>Total:</Text>
-              <Text style={styles.totalValor}>R$ {total.toFixed(2)}</Text>
+          <View style={LIPstyles.footer}>
+            <View style={LIPstyles.totallinha}>
+              <Text style={LIPstyles.totalLabel}>Total:</Text>
+              <Text style={LIPstyles.totalValor}>R$ {LIPtotal.toFixed(2)}</Text>
             </View>
 
-            <TouchableOpacity style={styles.checkbtn} onPress={LIPfinalizarPedido}>
-              <Text style={styles.Btncomprar}>Finalizar Pedido</Text>
+            <TouchableOpacity style={LIPstyles.checkbtn} onPress={LIPfinalizarPedido}>
+              <Text style={LIPstyles.Btncomprar}>Finalizar Pedido</Text>
             </TouchableOpacity>
 
-            {LIPmsg !== '' && <Text style={styles.LIPsucessoText}>{LIPmsg}</Text>}
+            {LIPmsg !== '' && <Text style={LIPstyles.LIPsucessoText}>{LIPmsg}</Text>}
           </View>
         </>
       )}
@@ -139,7 +139,7 @@ export default function LIPCartScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const LIPstyles = StyleSheet.create({
 
   container: { 
    flex: 1,

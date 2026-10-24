@@ -7,18 +7,18 @@ export default function NotFoundScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
-      <View style={styles.container}>
-        <Text style={styles.title}>This screen doesn't exist.</Text>
+      <View style={LIPstyles.container}>
+        <Text style={LIPstyles.title}>This screen doesn't exist.</Text>
 
-        <Link href="/" style={styles.link}>
-          <Text style={styles.linkText}>Go to home screen!</Text>
+        <Link href="/" style={LIPstyles.link}>
+          <Text style={LIPstyles.linkText}>Go to home screen!</Text>
         </Link>
       </View>
     </>
   );
 }
 
-const styles = StyleSheet.create({
+const LIPstyles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',

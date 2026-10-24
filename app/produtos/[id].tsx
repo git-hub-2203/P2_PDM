@@ -8,8 +8,8 @@ import { LIPaddProductToCart } from '@/constants/cart';
 import { showAlert } from '@/lib/alert';
 
 export default function LIPProductDetail() {
-  const { id } = useLocalSearchParams();
-  const LIPprodutoAtual = LIPProducts.find(item => item.LIPid === id);
+  const { id: LIPid } = useLocalSearchParams();
+  const LIPprodutoAtual = LIPProducts.find(LIPitem => LIPitem.LIPid === LIPid);
 
   const [LIPtamanhoSelecionado, setLIPtamanhoSelecionado] = useState<string>(
     LIPprodutoAtual?.LIPAsize?.[0] || 'M'
@@ -32,63 +32,63 @@ export default function LIPProductDetail() {
 
   if (!LIPprodutoAtual) {
     return (
-      <View style={styles.containerErro}>
-        <Text style={styles.textoErro}>Produto não encontrado!</Text>
+      <View style={LIPstyles.containerErro}>
+        <Text style={LIPstyles.textoErro}>Produto não encontrado!</Text>
       </View>
     );
   }
 
   return (
-    <SafeAreaView style={styles.containerGeral}>
-      <ScrollView style={styles.containerScroll} showsVerticalScrollIndicator={false}>
-        <View style={styles.containerImagem}>
-          <Image source={{ uri: LIPprodutoAtual.LIPimage }} style={styles.imagemProduto} />
+    <SafeAreaView style={LIPstyles.containerGeral}>
+      <ScrollView style={LIPstyles.containerScroll} showsVerticalScrollIndicator={false}>
+        <View style={LIPstyles.containerImagem}>
+          <Image source={{ uri: LIPprodutoAtual.LIPimage }} style={LIPstyles.imagemProduto} />
           
-          <TouchableOpacity style={styles.botaoVoltar} onPress={() => router.back()}>
+          <TouchableOpacity style={LIPstyles.botaoVoltar} onPress={() => router.back()}>
             <FallbackIcon name="left" size={20} color="#000" />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.botaoFavorito}>
+          <TouchableOpacity style={LIPstyles.botaoFavorito}>
             <FallbackIcon name="heart-outline" size={22} color="#000" />
           </TouchableOpacity>
         </View>
 
-        <View style={styles.containerInfo}>
-          <View style={styles.linhaTitulo}>
+        <View style={LIPstyles.containerInfo}>
+          <View style={LIPstyles.linhaTitulo}>
             <View style={{ flex: 1 }}>
-              <Text style={styles.nomeProduto}>{LIPprodutoAtual.LIPname}</Text>
-              <Text style={styles.subtituloProduto}>Roupa Infantil</Text>
+              <Text style={LIPstyles.nomeProduto}>{LIPprodutoAtual.LIPname}</Text>
+              <Text style={LIPstyles.subtituloProduto}>Roupa Infantil</Text>
             </View>
 
-            <View style={styles.containerAvaliacao}>
+            <View style={LIPstyles.containerAvaliacao}>
               <FallbackIcon name="star" size={18} color="#FF9500" />
-              <Text style={styles.textoAvaliacao}>4.8 <Text style={styles.textoQtdAvaliacao}>(230)</Text></Text>
+              <Text style={LIPstyles.textoAvaliacao}>4.8 <Text style={LIPstyles.textoQtdAvaliacao}>(230)</Text></Text>
             </View>
           </View>
-          <View style={styles.divisoria} />
-          <Text style={styles.tituloSecao}>Descrição</Text>
-          <Text style={styles.textoDescricao}>
+          <View style={LIPstyles.divisoria} />
+          <Text style={LIPstyles.tituloSecao}>Descrição</Text>
+          <Text style={LIPstyles.textoDescricao}>
             {LIPprodutoAtual.LIPdesc}
           </Text>
             
-          <Text style={styles.tituloSecao}>Tamanho</Text>
-          <View style={styles.containerTamanhos}>
-            {LIPprodutoAtual.LIPAsize.map((tamanho) => (
+          <Text style={LIPstyles.tituloSecao}>Tamanho</Text>
+          <View style={LIPstyles.containerTamanhos}>
+            {LIPprodutoAtual.LIPAsize.map((LIPtamanho) => (
               <TouchableOpacity
-                key={tamanho}
+                key={LIPtamanho}
                 style={[
-                  styles.caixaTamanho,
-                  LIPtamanhoSelecionado === tamanho && styles.caixaTamanhoSelecionado
+                  LIPstyles.caixaTamanho,
+                  LIPtamanhoSelecionado === LIPtamanho && LIPstyles.caixaTamanhoSelecionado
                 ]}
-                onPress={() => setLIPtamanhoSelecionado(tamanho)}
+                onPress={() => setLIPtamanhoSelecionado(LIPtamanho)}
               >
                 <Text
                   style={[
-                    styles.textoTamanho,
-                    LIPtamanhoSelecionado === tamanho && styles.textoTamanhoSelecionado
+                    LIPstyles.textoTamanho,
+                    LIPtamanhoSelecionado === LIPtamanho && LIPstyles.textoTamanhoSelecionado
                   ]}
                 >
-                  {tamanho}
+                  {LIPtamanho}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -96,21 +96,21 @@ export default function LIPProductDetail() {
         </View>
       </ScrollView>
 
-      <View style={styles.barraInferior}>
+      <View style={LIPstyles.barraInferior}>
         <View>
-          <Text style={styles.labelPreco}>Preço</Text>
-          <Text style={styles.valorPreco}>R$ {LIPprodutoAtual.LIPprice.toFixed(2)}</Text>
+          <Text style={LIPstyles.labelPreco}>Preço</Text>
+          <Text style={LIPstyles.valorPreco}>R$ {LIPprodutoAtual.LIPprice.toFixed(2)}</Text>
         </View>
 
-        <TouchableOpacity style={styles.botaoComprar} onPress={LIPadicionarAoCarrinho}>
-          <Text style={styles.textoBotaoComprar}>Comprar</Text>
+        <TouchableOpacity style={LIPstyles.botaoComprar} onPress={LIPadicionarAoCarrinho}>
+          <Text style={LIPstyles.textoBotaoComprar}>Comprar</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
+const LIPstyles = StyleSheet.create({
   containerGeral: {
     flex: 1,
     backgroundColor: '#fff',

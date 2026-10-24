@@ -1,3 +1,4 @@
+import { type ReactElement } from 'react';
 import { type StyleProp, type ViewStyle } from 'react-native';
 import Svg, { Circle, G, Path, Rect, Line } from 'react-native-svg';
 
@@ -16,7 +17,7 @@ type FallbackIconName =
   | 'star'
   | 'trash';
 
-const iconMap: Record<FallbackIconName, (props: { color: string; size: number }) => JSX.Element> = {
+const iconMap: Record<FallbackIconName, (props: { color: string; size: number }) => ReactElement> = {
   search: ({ color, size }) => (
     <G stroke={color} strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round">
       <Circle cx="11" cy="11" r="5.5" />

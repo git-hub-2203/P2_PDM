@@ -10,7 +10,7 @@ import { LIPobterPerfil } from '@/constants/userStore';
 import { LIPcarregarFotoPerfil } from '@/constants/profilePhoto';
 
 export default function App() {
-  const { session } = useAuth();
+  const { session: LIPsession } = useAuth();
   const LIP_FOTO_PADRAO =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToTpoywMK_vppXftxXNHpSm_vx_YsMjgtTIMa5FhSp2cjGWPNC1RruPAq-&s=10';
 
@@ -34,15 +34,15 @@ export default function App() {
       async function LIPcarregarDadosGlobais() {
         try {
 
-          if (!session) {
+          if (!LIPsession) {
             setLIPimgperfil(LIP_FOTO_PADRAO);
             setLIPendereco('Petrópolis, Manaus');
             return;
           }
 
           const [LIPfotoSalva, LIPperfil] = await Promise.all([
-            LIPcarregarFotoPerfil(session),
-            LIPobterPerfil(session),
+            LIPcarregarFotoPerfil(LIPsession),
+            LIPobterPerfil(LIPsession),
           ]);
           if (LIPfotoSalva) {
             setLIPimgperfil(LIPfotoSalva);
@@ -59,29 +59,29 @@ export default function App() {
       }
 
       LIPcarregarDadosGlobais();
-    }, [session])
+    }, [LIPsession])
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.perfil}>
-        <View style={styles.areahome}>
-          <Text style={styles.texto}>A entrega será feita em:</Text>
+    <View style={LIPstyles.container}>
+      <View style={LIPstyles.perfil}>
+        <View style={LIPstyles.areahome}>
+          <Text style={LIPstyles.texto}>A entrega será feita em:</Text>
           {/* Exibe o endereço dinâmico */}
-          <Text style={styles.endereco}>{LIPendereco}</Text>
+          <Text style={LIPstyles.endereco}>{LIPendereco}</Text>
         </View>
 
-        <View style={styles.areafoto}>
+        <View style={LIPstyles.areafoto}>
 
-          <Image source={{ uri: LIPimgperfil }} style={styles.fotoperfil} />
+          <Image source={{ uri: LIPimgperfil }} style={LIPstyles.fotoperfil} />
         </View>
       </View>
 
-      <View style={styles.containerPesquisa}>
-        <View style={styles.caixaInput}>
-          <FallbackIcon name="search" size={20} color="#999" style={styles.iconeBusca} />
+      <View style={LIPstyles.containerPesquisa}>
+        <View style={LIPstyles.caixaInput}>
+          <FallbackIcon name="search" size={20} color="#999" style={LIPstyles.iconeBusca} />
           <TextInput
-            style={styles.input}
+            style={LIPstyles.input}
             placeholder="Pesquisar roupa..."
             placeholderTextColor="#999"
             value={LIPpesquisa}
@@ -91,7 +91,7 @@ export default function App() {
         </View>
 
         <TouchableOpacity
-          style={styles.botaoFiltro}
+          style={LIPstyles.botaoFiltro}
           onPress={() => setLIPprecoAscendente((LIPatual) => !LIPatual)}
           accessibilityRole="button"
           accessibilityLabel={
@@ -106,7 +106,7 @@ export default function App() {
 
       <ScrollView
         style={{ flex: 1, width: '100%' }}
-        contentContainerStyle={styles.catalogo}
+        contentContainerStyle={LIPstyles.catalogo}
       >
         {LIPprodutosVisiveis.length > 0 ? (
           LIPprodutosVisiveis.map((item) => (
@@ -120,7 +120,7 @@ export default function App() {
             />
           ))
         ) : (
-          <Text style={styles.semResultados}>Nenhum produto encontrado.</Text>
+          <Text style={LIPstyles.semResultados}>Nenhum produto encontrado.</Text>
         )}
       </ScrollView>
 
@@ -129,7 +129,7 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
+const LIPstyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

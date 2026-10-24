@@ -10,15 +10,15 @@ export default function RootLayout() {
 }
 
 function RootNavigator() {
-  const { session, isLoading } = useAuth();
+  const { session: LIPsession, isLoading: LIPisLoading } = useAuth();
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
-      <Stack.Protected guard={!isLoading && !session}>
+      <Stack.Protected guard={!LIPisLoading && !LIPsession}>
         <Stack.Screen name="login" />
       </Stack.Protected>
-      <Stack.Protected guard={!isLoading && Boolean(session)}>
+      <Stack.Protected guard={!LIPisLoading && Boolean(LIPsession)}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
           name="edit1"

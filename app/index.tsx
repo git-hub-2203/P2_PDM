@@ -3,21 +3,21 @@ import { Redirect, type Href } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function IndexScreen() {
-  const { session, isLoading } = useAuth();
+  const { session: LIPsession, isLoading: LIPisLoading } = useAuth();
 
-  if (isLoading) {
+  if (LIPisLoading) {
     return (
-      <View style={styles.container}>
+      <View style={LIPstyles.container}>
         <ActivityIndicator size="large" color="#172b6e" />
       </View>
     );
   }
 
-  const LIPdestino: Href = session ? '/(tabs)' : ('/login' as Href);
+  const LIPdestino: Href = LIPsession ? '/(tabs)' : ('/login' as Href);
   return <Redirect href={LIPdestino} />;
 }
 
-const styles = StyleSheet.create({
+const LIPstyles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',

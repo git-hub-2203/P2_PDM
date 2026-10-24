@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { LIPatualizarPerfil, LIPobterPerfil } from '@/constants/userStore'
 
 export default function LIPedit3(){
-    const { session } = useAuth()
+    const { session: LIPsession } = useAuth()
 
     const[LIPpagnovo, setLIPpagnovo]=useState<string>('')
     const[LIPpagatual, setLIPpagatual]=useState<string>('')
@@ -16,7 +16,7 @@ export default function LIPedit3(){
       useCallback(() => {
         async function LIPcarregarCartao() {
           try {
-            const LIPperfil = session ? await LIPobterPerfil(session) : null
+            const LIPperfil = LIPsession ? await LIPobterPerfil(LIPsession) : null
             setLIPpagatual(LIPperfil?.cartaoFinal ?? '')
           } catch (error) {
             console.error('Erro ao carregar final do cartão:', error)
@@ -25,7 +25,7 @@ export default function LIPedit3(){
         }
 
         LIPcarregarCartao()
-      }, [session])
+      }, [LIPsession])
     )
 
    const LIPnovopag = async () => {
@@ -39,10 +39,10 @@ export default function LIPedit3(){
 
   try {
     const LIPultimosDigitos = LIPdigitosCartao.slice(-4)
-    if (!session) {
+    if (!LIPsession) {
       throw new Error('É necessário entrar na conta para atualizar o pagamento.')
     }
-    await LIPatualizarPerfil(session, { cartaoFinal: LIPultimosDigitos })
+    await LIPatualizarPerfil(LIPsession, { cartaoFinal: LIPultimosDigitos })
     setLIPpagatual(LIPultimosDigitos)
     setLIPpagnovo('');
     showAlert('Sucesso', 'Final do cartão salvo com segurança.')
@@ -52,13 +52,13 @@ export default function LIPedit3(){
   }
 };
 return(
-    <View style={styles.containersuperior}>
-        <View style={styles.xd2}>
-      <Text style={styles.texto}>Cartão atual:</Text>
+    <View style={LIPstyles.containersuperior}>
+        <View style={LIPstyles.xd2}>
+      <Text style={LIPstyles.texto}>Cartão atual:</Text>
       <Text style={{flex:1, flexWrap:'wrap'}}>•••• •••• •••• {LIPpagatual}</Text>
       </View>
-      <View style={styles.xd2}>
-        <Text style={styles.texto}>Alterar Número do cartão:</Text>
+      <View style={LIPstyles.xd2}>
+        <Text style={LIPstyles.texto}>Alterar Número do cartão:</Text>
         <TextInput onChangeText={setLIPpagnovo} 
         value={LIPpagnovo} 
         placeholder="Digite o Número do Cartão  aqui."
@@ -66,9 +66,9 @@ return(
          secureTextEntry
          style={{flex:1}}/>
       </View>
-      <View style={styles.botaoxd}>
-        <TouchableOpacity  onPress={LIPnovopag}style={styles.botao}>
-        <Text style={styles.textobotao}>Salvar Cartão</Text>
+      <View style={LIPstyles.botaoxd}>
+        <TouchableOpacity  onPress={LIPnovopag}style={LIPstyles.botao}>
+        <Text style={LIPstyles.textobotao}>Salvar Cartão</Text>
       </TouchableOpacity>
       </View>
       
@@ -78,7 +78,7 @@ return(
 
 
 }
-const styles= StyleSheet.create({
+const LIPstyles= StyleSheet.create({
  texto:{
     fontSize:15,
     marginRight:30,

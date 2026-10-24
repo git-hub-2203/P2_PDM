@@ -12,8 +12,8 @@ interface LIPCardProdutosProps {
 }
 
 export default function LIPCardProdutos(props: LIPCardProdutosProps) {
-  const router = useRouter();
-  const LIPabrirDetalhes = () => router.push(`/produtos/${props.LIPid}`);
+  const LIProuter = useRouter();
+  const LIPabrirDetalhes = () => LIProuter.push(`/produtos/${props.LIPid}`);
   const LIPadicionarAoCarrinho = async () => {
     try {
       await LIPaddProductToCart(props, props.LIPAsize[0] ?? 'M');
@@ -25,31 +25,31 @@ export default function LIPCardProdutos(props: LIPCardProdutosProps) {
   };
 
   return (
-    <View style={styles.card}>
+    <View style={LIPstyles.card}>
       <TouchableOpacity
         onPress={LIPabrirDetalhes}
         accessibilityRole="button"
         accessibilityLabel={`Ver detalhes de ${props.LIPname}`}
       >
-        <Image source={{ uri: props.LIPimage }} style={styles.foto} />
-        <Text style={styles.nomeproduto}>{props.LIPname}</Text>
+        <Image source={{ uri: props.LIPimage }} style={LIPstyles.foto} />
+        <Text style={LIPstyles.nomeproduto}>{props.LIPname}</Text>
       </TouchableOpacity>
 
-      <View style={styles.areapreco}>
-        <Text style={styles.precoproduto}>R$ {props.LIPprice.toFixed(2)}</Text>
+      <View style={LIPstyles.areapreco}>
+        <Text style={LIPstyles.precoproduto}>R$ {props.LIPprice.toFixed(2)}</Text>
         <TouchableOpacity
-          style={styles.botao}
+          style={LIPstyles.botao}
           onPress={LIPadicionarAoCarrinho}
           accessibilityRole="button"
           accessibilityLabel={`Adicionar ${props.LIPname} ao carrinho`}
         >
-          <Text style={styles.textobotao}>+</Text>
+          <Text style={LIPstyles.textobotao}>+</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-const styles = StyleSheet.create({
+const LIPstyles = StyleSheet.create({
   card: {
     backgroundColor: '#FFFFFF', 
     borderRadius: 15,          

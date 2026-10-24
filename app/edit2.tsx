@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { LIPatualizarPerfil, LIPobterPerfil } from '@/constants/userStore'
 
 export default function LIPedit2(){
-    const { session } = useAuth()
+    const { session: LIPsession } = useAuth()
 
     const[LIPtelnovo, setLIPtelnovo]=useState<string>('')
     const[LIPtelatual, setLIPtelatual]=useState<string>('')
@@ -15,7 +15,7 @@ export default function LIPedit2(){
       useCallback(() => {
         async function LIPcarregarTelefone() {
           try {
-            const LIPperfil = session ? await LIPobterPerfil(session) : null
+            const LIPperfil = LIPsession ? await LIPobterPerfil(LIPsession) : null
             setLIPtelatual(LIPperfil?.telefone ?? '')
           } catch (error) {
             console.error('Erro ao carregar telefone:', error)
@@ -24,7 +24,7 @@ export default function LIPedit2(){
         }
 
         LIPcarregarTelefone()
-      }, [session])
+      }, [LIPsession])
     )
 
     const LIPnovotel = async () => {
@@ -37,10 +37,10 @@ export default function LIPedit2(){
 
   try {
     const LIPtelefoneLimpo = LIPtelnovo.trim()
-    if (!session) {
+    if (!LIPsession) {
       throw new Error('É necessário entrar na conta para atualizar o telefone.')
     }
-    await LIPatualizarPerfil(session, { telefone: LIPtelefoneLimpo })
+    await LIPatualizarPerfil(LIPsession, { telefone: LIPtelefoneLimpo })
     setLIPtelatual(LIPtelefoneLimpo)
     setLIPtelnovo('')
     showAlert('Sucesso', 'Telefone salvo com sucesso!')
@@ -50,22 +50,22 @@ export default function LIPedit2(){
   }
 };
 return(
-    <View style={styles.containersuperior}>
-        <View style={styles.xd2}>
-      <Text style={styles.texto}>Telefone atual:</Text>
+    <View style={LIPstyles.containersuperior}>
+        <View style={LIPstyles.xd2}>
+      <Text style={LIPstyles.texto}>Telefone atual:</Text>
       <Text style={{flex:1, flexWrap:'wrap'}}>{LIPtelatual}</Text>
       </View>
-      <View style={styles.xd2}>
-        <Text style={styles.texto}>Alterar telefone:</Text>
+      <View style={LIPstyles.xd2}>
+        <Text style={LIPstyles.texto}>Alterar telefone:</Text>
         <TextInput onChangeText={setLIPtelnovo} 
         value={LIPtelnovo} 
         placeholder="Digite o telefone aqui."
          multiline={true}
          style={{flex:1}}/>
       </View>
-      <View style={styles.botaoxd}>
-        <TouchableOpacity  onPress={LIPnovotel}style={styles.botao}>
-        <Text style={styles.textobotao}>Salvar Telefone</Text>
+      <View style={LIPstyles.botaoxd}>
+        <TouchableOpacity  onPress={LIPnovotel}style={LIPstyles.botao}>
+        <Text style={LIPstyles.textobotao}>Salvar Telefone</Text>
       </TouchableOpacity>
       </View>
       
@@ -75,7 +75,7 @@ return(
 
 
 }
-const styles= StyleSheet.create({
+const LIPstyles= StyleSheet.create({
  texto:{
     fontSize:15,
     marginRight:30,

@@ -16,7 +16,7 @@ import {
 import { showAlert } from '@/lib/alert';
 
 export default function LoginScreen() {
-  const { signIn } = useAuth();
+  const { signIn: LIPsignIn } = useAuth();
   const [LIPmodoCadastro, setLIPmodoCadastro] = useState(false);
   const [LIPnome, setLIPnome] = useState('');
   const [LIPemail, setLIPemail] = useState('');
@@ -70,7 +70,7 @@ export default function LoginScreen() {
         }
       }
 
-      await signIn(LIPemailLimpo);
+      await LIPsignIn(LIPemailLimpo);
       router.replace('/(tabs)');
     } catch (error) {
       console.error('Erro ao autenticar usuário:', error);
@@ -85,56 +85,59 @@ export default function LoginScreen() {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
+      style={LIPstyles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
-        <View style={styles.header}>
-          <Text style={styles.brand}>Loja de Roupas</Text>
-          <Text style={styles.title}>{LIPmodoCadastro ? 'Crie sua conta' : 'Bem-vindo de volta'}</Text>
-          <Text style={styles.subtitle}>
+      <ScrollView contentContainerStyle={LIPstyles.scrollContent} keyboardShouldPersistTaps="handled">
+        <View style={LIPstyles.header}>
+          <View style={LIPstyles.brandBadge}>
+            <Text style={LIPstyles.brandBadgeText}>LIP</Text>
+          </View>
+          <Text style={LIPstyles.brand}>Loja de Roupas</Text>
+          <Text style={LIPstyles.title}>{LIPmodoCadastro ? 'Crie sua conta' : 'Bem-vindo de volta'}</Text>
+          <Text style={LIPstyles.subtitle}>
             {LIPmodoCadastro
               ? 'Preencha seus dados para continuar'
               : 'Entre para acessar sua loja infantil'}
           </Text>
         </View>
 
-        <View style={styles.form}>
+        <View style={LIPstyles.form}>
           {LIPmodoCadastro && (
             <>
-              <Text style={styles.label}>Nome completo</Text>
+              <Text style={LIPstyles.label}>Nome completo</Text>
               <TextInput
                 value={LIPnome}
                 onChangeText={setLIPnome}
                 placeholder="Seu nome"
                 placeholderTextColor="#8b93a7"
-                style={styles.input}
+                style={LIPstyles.input}
                 autoCapitalize="words"
                 textContentType="name"
               />
             </>
           )}
 
-          <Text style={styles.label}>E-mail</Text>
+          <Text style={LIPstyles.label}>E-mail</Text>
           <TextInput
             value={LIPemail}
             onChangeText={setLIPemail}
             placeholder="seu@email.com"
             placeholderTextColor="#8b93a7"
-            style={styles.input}
+            style={LIPstyles.input}
             keyboardType="email-address"
             autoCapitalize="none"
             autoComplete="email"
             textContentType="emailAddress"
           />
 
-          <Text style={styles.label}>Senha</Text>
+          <Text style={LIPstyles.label}>Senha</Text>
           <TextInput
             value={LIPsenha}
             onChangeText={setLIPsenha}
             placeholder="Mínimo de 6 caracteres"
             placeholderTextColor="#8b93a7"
-            style={styles.input}
+            style={LIPstyles.input}
             secureTextEntry
             autoCapitalize="none"
             textContentType={LIPmodoCadastro ? 'newPassword' : 'password'}
@@ -142,45 +145,45 @@ export default function LoginScreen() {
 
           {LIPmodoCadastro && (
             <>
-              <Text style={styles.label}>Endereço de entrega</Text>
+              <Text style={LIPstyles.label}>Endereço de entrega</Text>
               <TextInput
                 value={LIPendereco}
                 onChangeText={setLIPendereco}
                 placeholder="Rua, número, bairro e cidade"
                 placeholderTextColor="#8b93a7"
-                style={styles.input}
+                style={LIPstyles.input}
                 autoCapitalize="words"
                 textContentType="fullStreetAddress"
               />
 
-              <Text style={styles.label}>Telefone</Text>
+              <Text style={LIPstyles.label}>Telefone</Text>
               <TextInput
                 value={LIPtelefone}
                 onChangeText={setLIPtelefone}
                 placeholder="(00) 00000-0000"
                 placeholderTextColor="#8b93a7"
-                style={styles.input}
+                style={LIPstyles.input}
                 keyboardType="phone-pad"
                 textContentType="telephoneNumber"
               />
 
-              <Text style={styles.label}>Pagamento</Text>
+              <Text style={LIPstyles.label}>Pagamento</Text>
               <TextInput
                 value={LIPcartao}
                 onChangeText={setLIPcartao}
                 placeholder="Somente os 4 últimos dígitos"
                 placeholderTextColor="#8b93a7"
-                style={styles.input}
+                style={LIPstyles.input}
                 keyboardType="number-pad"
                 secureTextEntry
                 maxLength={4}
               />
-              <Text style={styles.note}>O número completo do cartão não deve ser informado.</Text>
+              <Text style={LIPstyles.note}>O número completo do cartão não deve ser informado.</Text>
             </>
           )}
 
           <TouchableOpacity
-            style={[styles.primaryButton, LIPenviando && styles.disabledButton]}
+            style={[LIPstyles.primaryButton, LIPenviando && LIPstyles.disabledButton]}
             onPress={LIPenviar}
             disabled={LIPenviando}
             accessibilityRole="button"
@@ -188,17 +191,17 @@ export default function LoginScreen() {
             {LIPenviando ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text style={styles.primaryButtonText}>
+              <Text style={LIPstyles.primaryButtonText}>
                 {LIPmodoCadastro ? 'Criar conta' : 'Entrar'}
               </Text>
             )}
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.toggleButton}
+            style={LIPstyles.toggleButton}
             onPress={() => setLIPmodoCadastro((LIPatual) => !LIPatual)}
           >
-            <Text style={styles.toggleText}>
+            <Text style={LIPstyles.toggleText}>
               {LIPmodoCadastro ? 'Já tem uma conta? Entrar' : 'Ainda não tem conta? Cadastre-se'}
             </Text>
           </TouchableOpacity>
@@ -208,10 +211,10 @@ export default function LoginScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const LIPstyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f7fc',
+    backgroundColor: '#edf3ff',
   },
   scrollContent: {
     flexGrow: 1,
@@ -223,11 +226,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 28,
   },
+  brandBadge: {
+    width: 68,
+    height: 68,
+    borderRadius: 20,
+    backgroundColor: '#172b6e',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+    shadowColor: '#172b6e',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 6,
+  },
+  brandBadgeText: {
+    color: '#fff',
+    fontSize: 26,
+    fontWeight: '900',
+    letterSpacing: 2,
+  },
   brand: {
     color: '#172b6e',
-    fontSize: 42,
+    fontSize: 32,
     fontWeight: '900',
-    letterSpacing: 4,
+    letterSpacing: 1.5,
     textAlign: 'center',
   },
   title: {
@@ -247,10 +270,12 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     padding: 22,
     shadowColor: '#172b6e',
-    shadowOffset: { width: 0, height: 5 },
+    shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.08,
-    shadowRadius: 14,
-    elevation: 3,
+    shadowRadius: 16,
+    elevation: 4,
+    borderWidth: 1,
+    borderColor: '#edf0f8',
   },
   label: {
     color: '#26365f',
@@ -263,7 +288,7 @@ const styles = StyleSheet.create({
     minHeight: 50,
     borderWidth: 1,
     borderColor: '#dce2ef',
-    borderRadius: 10,
+    borderRadius: 12,
     paddingHorizontal: 14,
     color: '#202a44',
     backgroundColor: '#fbfcff',
@@ -278,8 +303,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#172b6e',
-    borderRadius: 10,
+    borderRadius: 12,
     marginTop: 24,
+    shadowColor: '#172b6e',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.18,
+    shadowRadius: 10,
+    elevation: 3,
   },
   disabledButton: {
     opacity: 0.65,
