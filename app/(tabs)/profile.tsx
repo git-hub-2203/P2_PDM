@@ -1,6 +1,7 @@
-import { Alert, StyleSheet, TouchableOpacity, Image, Text, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, Text, View } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
+import { showAlert } from '@/lib/alert';
 import { useState, useCallback } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from '@/constants/Colors';
@@ -41,7 +42,7 @@ export default function TabThreeScreenLIP() {
           setLIPperfilUsuario(LIPdadosPerfil);
         } catch (error) {
           console.error('Erro ao carregar dados do perfil:', error);
-          Alert.alert('Erro', 'Não foi possível carregar os dados do perfil.');
+          showAlert('Erro', 'Não foi possível carregar os dados do perfil.');
         }
       }
       LIPcarregarFoto();
@@ -54,7 +55,7 @@ export default function TabThreeScreenLIP() {
       router.replace('/login' as Href);
     } catch (error) {
       console.error('Erro ao sair da conta:', error);
-      Alert.alert('Erro', 'Não foi possível sair da conta.');
+      showAlert('Erro', 'Não foi possível sair da conta.');
     }
   };
 
@@ -62,7 +63,7 @@ export default function TabThreeScreenLIP() {
     try {
       const LIPpermissao = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (!LIPpermissao.granted) {
-        Alert.alert('Permissão necessária', 'Permita o acesso às fotos para trocar a imagem do perfil.');
+        showAlert('Permissão necessária', 'Permita o acesso às fotos para trocar a imagem do perfil.');
         return;
       }
 
@@ -88,7 +89,7 @@ export default function TabThreeScreenLIP() {
       }
     } catch (error) {
       console.error('Erro ao selecionar ou salvar foto do perfil:', error);
-      Alert.alert('Erro', 'Não foi possível atualizar a foto do perfil.');
+      showAlert('Erro', 'Não foi possível atualizar a foto do perfil.');
     }
   };
 

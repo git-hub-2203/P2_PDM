@@ -1,5 +1,6 @@
 
-import { Text, View, StyleSheet,TextInput, TouchableOpacity, Alert} from 'react-native'
+import { Text, View, StyleSheet,TextInput, TouchableOpacity } from 'react-native'
+import { showAlert } from '@/lib/alert';
 import { useCallback, useState } from 'react'
 import { useFocusEffect } from 'expo-router'
 import { useAuth } from '@/contexts/AuthContext'
@@ -18,7 +19,7 @@ export default function LIPedit2(){
             setLIPtelatual(LIPperfil?.telefone ?? '')
           } catch (error) {
             console.error('Erro ao carregar telefone:', error)
-            Alert.alert('Erro', 'Não foi possível carregar o telefone salvo.')
+            showAlert('Erro', 'Não foi possível carregar o telefone salvo.')
           }
         }
 
@@ -30,7 +31,7 @@ export default function LIPedit2(){
   
   if (LIPtelnovo.trim() === '') {
     
-    Alert.alert('Aviso', 'Nada foi digitado!');
+    showAlert('Aviso', 'Nada foi digitado!');
     return
   }
 
@@ -42,10 +43,10 @@ export default function LIPedit2(){
     await LIPatualizarPerfil(session, { telefone: LIPtelefoneLimpo })
     setLIPtelatual(LIPtelefoneLimpo)
     setLIPtelnovo('')
-    Alert.alert('Sucesso', 'Telefone salvo com sucesso!')
+    showAlert('Sucesso', 'Telefone salvo com sucesso!')
   } catch (error) {
     console.error('Erro ao salvar telefone:', error)
-    Alert.alert('Erro', 'Não foi possível salvar o telefone.')
+    showAlert('Erro', 'Não foi possível salvar o telefone.')
   }
 };
 return(

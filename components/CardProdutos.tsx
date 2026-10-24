@@ -1,6 +1,7 @@
-import { Alert, View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LIPaddProductToCart } from '@/constants/cart';
+import { showAlert } from '@/lib/alert';
 
 interface LIPCardProdutosProps {
   LIPid: string;
@@ -16,10 +17,10 @@ export default function LIPCardProdutos(props: LIPCardProdutosProps) {
   const LIPadicionarAoCarrinho = async () => {
     try {
       await LIPaddProductToCart(props, props.LIPAsize[0] ?? 'M');
-      Alert.alert('Adicionado', 'Produto adicionado ao carrinho.');
+      showAlert('Adicionado', 'Produto adicionado ao carrinho.');
     } catch (error) {
       console.error('Erro ao adicionar produto ao carrinho:', error);
-      Alert.alert('Erro', 'Não foi possível adicionar o produto ao carrinho.');
+      showAlert('Erro', 'Não foi possível adicionar o produto ao carrinho.');
     }
   };
 

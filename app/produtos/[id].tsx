@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { useLocalSearchParams, router } from 'expo-router';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { LIPProducts } from '../../constants/Products';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LIPaddProductToCart } from '@/constants/cart';
+import { showAlert } from '@/lib/alert';
 
 export default function LIPProductDetail() {
   const { id } = useLocalSearchParams();
@@ -20,13 +21,13 @@ export default function LIPProductDetail() {
 
     try {
       await LIPaddProductToCart(LIPprodutoAtual, LIPtamanhoSelecionado);
-      Alert.alert('Sucesso!', 'Produto adicionado ao carrinho.', [
+      showAlert('Sucesso!', 'Produto adicionado ao carrinho.', [
         { text: 'Continuar na Loja' },
         { text: 'Ir para o Carrinho', onPress: () => router.push('/(tabs)/cart') },
       ]);
     } catch (error) {
       console.error('Erro ao adicionar produto ao carrinho:', error);
-      Alert.alert('Erro', 'Não foi possível adicionar o produto ao carrinho.');
+      showAlert('Erro', 'Não foi possível adicionar o produto ao carrinho.');
     }
   };
 

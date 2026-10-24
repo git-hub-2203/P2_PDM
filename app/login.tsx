@@ -4,7 +4,6 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -14,6 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { showAlert } from '@/lib/alert';
 
 export default function LoginScreen() {
   const { signIn } = useAuth();
@@ -29,7 +29,7 @@ export default function LoginScreen() {
   const LIPenviar = async () => {
     const LIPemailLimpo = LIPemail.trim().toLocaleLowerCase();
     if (!LIPemailLimpo.includes('@') || LIPsenha.length < 6) {
-      Alert.alert('Confira os dados', 'Informe um e-mail válido e uma senha com pelo menos 6 caracteres.');
+      showAlert('Confira os dados', 'Informe um e-mail válido e uma senha com pelo menos 6 caracteres.');
       return;
     }
 
@@ -41,7 +41,7 @@ export default function LoginScreen() {
         LIPtelefone.replace(/\D/g, '').length < 8 ||
         LIPultimosDigitos.length !== 4
       ) {
-        Alert.alert(
+        showAlert(
           'Dados incompletos',
           'Preencha nome, endereço, telefone e os quatro últimos dígitos do cartão.'
         );
@@ -65,7 +65,7 @@ export default function LoginScreen() {
       } else {
         const LIPusuario = await LIPvalidarLogin(LIPemailLimpo, LIPsenha);
         if (!LIPusuario) {
-          Alert.alert('Não foi possível entrar', 'E-mail ou senha incorretos.');
+          showAlert('Não foi possível entrar', 'E-mail ou senha incorretos.');
           return;
         }
       }
@@ -74,7 +74,7 @@ export default function LoginScreen() {
       router.replace('/(tabs)');
     } catch (error) {
       console.error('Erro ao autenticar usuário:', error);
-      Alert.alert(
+      showAlert(
         'Erro',
         error instanceof Error ? error.message : 'Não foi possível concluir a operação.'
       );

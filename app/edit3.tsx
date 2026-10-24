@@ -1,5 +1,6 @@
 
-import { Text, View, StyleSheet,TextInput, TouchableOpacity, Alert} from 'react-native'
+import { Text, View, StyleSheet,TextInput, TouchableOpacity } from 'react-native'
+import { showAlert } from '@/lib/alert';
 import { useCallback, useState } from 'react'
 import { useFocusEffect } from 'expo-router'
 import { useAuth } from '@/contexts/AuthContext'
@@ -19,7 +20,7 @@ export default function LIPedit3(){
             setLIPpagatual(LIPperfil?.cartaoFinal ?? '')
           } catch (error) {
             console.error('Erro ao carregar final do cartão:', error)
-            Alert.alert('Erro', 'Não foi possível carregar o cartão salvo.')
+            showAlert('Erro', 'Não foi possível carregar o cartão salvo.')
           }
         }
 
@@ -32,7 +33,7 @@ export default function LIPedit3(){
   const LIPdigitosCartao = LIPpagnovo.replace(/\D/g, '')
   if (LIPdigitosCartao.length < 4) {
 
-    Alert.alert('Aviso', 'Digite pelo menos os quatro últimos dígitos do cartão.')
+    showAlert('Aviso', 'Digite pelo menos os quatro últimos dígitos do cartão.')
     return
   }
 
@@ -44,10 +45,10 @@ export default function LIPedit3(){
     await LIPatualizarPerfil(session, { cartaoFinal: LIPultimosDigitos })
     setLIPpagatual(LIPultimosDigitos)
     setLIPpagnovo('');
-    Alert.alert('Sucesso', 'Final do cartão salvo com segurança.')
+    showAlert('Sucesso', 'Final do cartão salvo com segurança.')
   } catch (error) {
     console.error('Erro ao salvar final do cartão:', error)
-    Alert.alert('Erro', 'Não foi possível salvar o cartão.')
+    showAlert('Erro', 'Não foi possível salvar o cartão.')
   }
 };
 return(

@@ -1,4 +1,5 @@
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { showAlert } from '@/lib/alert';
 import { useCallback, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
@@ -17,7 +18,7 @@ export default function LIPedit1() {
           setLIPendatual(LIPperfil?.endereco ?? '');
         } catch (error) {
           console.error('Erro ao carregar endereço:', error);
-          Alert.alert('Erro', 'Não foi possível carregar o endereço salvo.');
+          showAlert('Erro', 'Não foi possível carregar o endereço salvo.');
         }
       }
 
@@ -28,7 +29,7 @@ export default function LIPedit1() {
   const LIPnovoend = async () => {
     const LIPenderecoLimpo = LIPendnovo.trim();
     if (LIPenderecoLimpo === '') {
-      Alert.alert('Aviso', 'Nada foi digitado!');
+      showAlert('Aviso', 'Nada foi digitado!');
       return;
     }
 
@@ -39,10 +40,10 @@ export default function LIPedit1() {
       await LIPatualizarPerfil(session, { endereco: LIPenderecoLimpo });
       setLIPendatual(LIPenderecoLimpo);
       setLIPendnovo('');
-      Alert.alert('Sucesso', 'Endereço salvo com sucesso!');
+      showAlert('Sucesso', 'Endereço salvo com sucesso!');
     } catch (error) {
       console.error('Erro ao salvar endereço:', error);
-      Alert.alert('Erro', 'Não foi possível salvar o endereço.');
+      showAlert('Erro', 'Não foi possível salvar o endereço.');
     }
   };
 

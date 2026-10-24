@@ -1,7 +1,23 @@
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Entypo from '@expo/vector-icons/Entypo';
+import Feather from '@expo/vector-icons/Feather';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Stack } from 'expo-router';
+import { useEffect } from 'react';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 
 export default function RootLayout() {
+  useEffect(() => {
+    void Promise.all([
+      AntDesign.loadFont(),
+      Entypo.loadFont(),
+      Feather.loadFont(),
+      Ionicons.loadFont(),
+    ]).catch((error) => {
+      console.warn('Erro ao carregar ícones do app:', error);
+    });
+  }, []);
+
   return (
     <AuthProvider>
       <RootNavigator />

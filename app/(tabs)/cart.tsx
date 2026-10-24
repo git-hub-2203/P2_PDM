@@ -1,8 +1,9 @@
 import { useState, useCallback } from 'react';
-import { Alert, StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { useFocusEffect } from 'expo-router';
 import { LIPCartItem, LIPloadCart, LIPsaveCart } from '@/constants/cart';
+import { showAlert } from '@/lib/alert';
 
 export default function LIPCartScreen() {
   const [LIPcartItems, setLIPCartItems] = useState<LIPCartItem[]>([]);
@@ -15,7 +16,7 @@ export default function LIPCartScreen() {
           setLIPCartItems(await LIPloadCart());
         } catch (error) {
           console.error('Erro ao carregar carrinho:', error);
-          Alert.alert('Erro', 'Não foi possível carregar o carrinho.');
+          showAlert('Erro', 'Não foi possível carregar o carrinho.');
         }
       }
       LIPloadCarrinho();
@@ -28,7 +29,7 @@ export default function LIPCartScreen() {
       setLIPCartItems(LIPnovaLista);
     } catch (error) {
       console.error('Erro ao salvar carrinho:', error);
-      Alert.alert('Erro', 'Não foi possível atualizar o carrinho.');
+      showAlert('Erro', 'Não foi possível atualizar o carrinho.');
     }
   };
 
@@ -64,7 +65,7 @@ export default function LIPCartScreen() {
       }, 3000);
     } catch (error) {
       console.error('Erro ao finalizar pedido:', error);
-      Alert.alert('Erro', 'Não foi possível finalizar o pedido.');
+      showAlert('Erro', 'Não foi possível finalizar o pedido.');
     }
   };
 
