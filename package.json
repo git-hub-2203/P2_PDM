@@ -40,7 +40,7 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "predeploy": "npx expo export --platform web",
-    "deploy": "gh-pages --nojekyll -d dist"
+    "deploy": "npx expo export --platform web && touch dist/.nojekyll && npx gh-pages -d dist"
   },
   "private": true
 }
