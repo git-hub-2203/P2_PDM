@@ -110,7 +110,7 @@ export default function App() {
         contentContainerStyle={LIPstyles.catalogo}
       >
         <View style={LIPstyles.catalogoIntro}>
-          <Text style={LIPstyles.catalogoTitulo}>Novidades para os pequenos</Text>
+          <Text style={LIPstyles.catalogoTitulo}>Roupas para a sua criança</Text>
           <Text style={LIPstyles.catalogoSubtitulo}>Conforto e carinho em cada peça</Text>
         </View>
         {LIPprodutosVisiveis.length > 0 ? (
