@@ -4,6 +4,7 @@ import { useFocusEffect } from 'expo-router';
 import FallbackIcon from '@/components/FallbackIcon';
 import { LIPCartItem, LIPloadCart, LIPsaveCart } from '@/constants/cart';
 import { showAlert } from '@/lib/alert';
+import Colors from '@/constants/Colors';
 
 export default function LIPCartScreen() {
   const [LIPcartItems, setLIPCartItems] = useState<LIPCartItem[]>([]);
@@ -75,7 +76,11 @@ export default function LIPCartScreen() {
     <View style={LIPstyles.container}>
       {LIPcartItems.length === 0 ? (
         <View style={LIPstyles.ContainerVazio}>
-          <Text style={LIPstyles.TextVazio}>O seu carrinho está vazio. Vá ao catálogo para enchê-lo.</Text>
+          <View style={LIPstyles.emptyIcon}>
+            <FallbackIcon name="shopping-cart" size={34} color={Colors.light.primaryDark} />
+          </View>
+          <Text style={LIPstyles.emptyTitle}>Seu carrinho está esperando</Text>
+          <Text style={LIPstyles.TextVazio}>Encontre uma peça especial no catálogo e ela aparece por aqui.</Text>
         </View>
       ) : (
         <>
@@ -143,18 +148,35 @@ const LIPstyles = StyleSheet.create({
 
   container: { 
    flex: 1,
-   backgroundColor: '#f8f9fa' 
+   backgroundColor: Colors.light.background,
     },
 
   ContainerVazio: { 
   flex: 1, 
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  paddingHorizontal: 28,
+  },
+  emptyIcon: {
+    width: 76,
+    height: 76,
+    borderRadius: 26,
+    backgroundColor: Colors.light.sage,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 18,
+  },
+  emptyTitle: {
+    fontSize: 19,
+    color: Colors.light.text,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 7,
      },
 
   TextVazio: {
-   fontSize: 15, 
-   color: '#616b74', 
+   fontSize: 14,
+   color: Colors.light.textMuted,
    alignSelf: 'center', 
    textAlign: 'center', 
    paddingHorizontal: 20 
@@ -165,18 +187,20 @@ const LIPstyles = StyleSheet.create({
   },
   card: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.surface,
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 16,
     marginBottom: 12,
     elevation: 2,
+    borderWidth: 1,
+    borderColor: Colors.light.border,
     position: 'relative',
   },
   image: { 
   width: 70, 
   height: 70, 
   borderRadius: 6, 
-  backgroundColor: '#e9ecef'
+  backgroundColor: Colors.light.surfaceMuted
  },
 
   info: { 
@@ -188,18 +212,18 @@ const LIPstyles = StyleSheet.create({
   itemName: { 
   fontSize: 16, 
   fontWeight: 'bold', 
-  color: '#212529'
+  color: Colors.light.text
    },
   itemSize: { 
   fontSize: 13, 
-  color: '#616b74', 
+  color: Colors.light.textMuted,
   marginTop: 2 
   },
 
   itemPrice: { 
   fontSize: 20, 
   fontWeight: '600', 
-  color: '#2b8a3e', 
+  color: Colors.light.primaryDark,
   marginTop: 4, 
   position: 'absolute', 
   right: 10, 
@@ -216,15 +240,15 @@ const LIPstyles = StyleSheet.create({
   btnQty: {
     width: 28,
     height: 28,
-    backgroundColor: '#e9ecef',
-    borderRadius: 4,
+    backgroundColor: Colors.light.surfaceMuted,
+    borderRadius: 9,
     justifyContent: 'center',
     alignItems: 'center',
   },
   btnText: {
   fontSize: 16, 
   fontWeight: 'bold', 
-  color: '#333' },
+  color: Colors.light.primaryDark },
   qtyText: { 
   fontSize: 14, 
   fontWeight: 'bold' },
@@ -234,10 +258,10 @@ const LIPstyles = StyleSheet.create({
    },
 
   footer: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.surface,
     padding: 20,
     borderTopWidth: 1,
-    borderTopColor: '#dee2e6',
+    borderTopColor: Colors.light.border,
   },
 
   totallinha: {
@@ -247,21 +271,21 @@ const LIPstyles = StyleSheet.create({
 },
 
   totalLabel: { fontSize: 18, 
-  color: '#495057' 
+  color: Colors.light.textMuted,
 },
 
   totalValor: { 
   fontSize: 22, 
   fontWeight: 'bold', 
-  color: '#212529'
+  color: Colors.light.text
  },
 
   checkbtn: {
-    backgroundColor: '#172b6e',
+    backgroundColor: Colors.light.primary,
     paddingVertical: 14,
     borderRadius: 8,
     alignItems: 'center',
   },
   Btncomprar: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
-  LIPsucessoText: { color: '#2b8a3e', fontSize: 16, fontWeight: 'bold', marginTop: 10, textAlign: 'center' },
+  LIPsucessoText: { color: Colors.light.primaryDark, fontSize: 15, fontWeight: 'bold', marginTop: 10, textAlign: 'center' },
 });

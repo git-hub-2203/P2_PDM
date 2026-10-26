@@ -14,6 +14,7 @@ import {
   View,
 } from 'react-native';
 import { showAlert } from '@/lib/alert';
+import Colors from '@/constants/Colors';
 
 export default function LoginScreen() {
   const { signIn: LIPsignIn } = useAuth();
@@ -91,9 +92,9 @@ export default function LoginScreen() {
       <ScrollView contentContainerStyle={LIPstyles.scrollContent} keyboardShouldPersistTaps="handled">
         <View style={LIPstyles.header}>
           <View style={LIPstyles.brandBadge}>
-            <Text style={LIPstyles.brandBadgeText}>LIP</Text>
+            <Text style={LIPstyles.brandBadgeText}>PE</Text>
           </View>
-          <Text style={LIPstyles.brand}>Loja de Roupas</Text>
+          <Text style={LIPstyles.brand}>Pequenos Encantos</Text>
           <Text style={LIPstyles.title}>{LIPmodoCadastro ? 'Crie sua conta' : 'Bem-vindo de volta'}</Text>
           <Text style={LIPstyles.subtitle}>
             {LIPmodoCadastro
@@ -214,7 +215,7 @@ export default function LoginScreen() {
 const LIPstyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#edf3ff',
+    backgroundColor: Colors.light.background,
   },
   scrollContent: {
     flexGrow: 1,
@@ -230,55 +231,55 @@ const LIPstyles = StyleSheet.create({
     width: 68,
     height: 68,
     borderRadius: 20,
-    backgroundColor: '#172b6e',
+    backgroundColor: Colors.light.secondary,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
-    shadowColor: '#172b6e',
+    shadowColor: Colors.light.primaryDark,
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.2,
     shadowRadius: 12,
     elevation: 6,
   },
   brandBadgeText: {
-    color: '#fff',
+    color: Colors.light.primaryDark,
     fontSize: 26,
     fontWeight: '900',
     letterSpacing: 2,
   },
   brand: {
-    color: '#172b6e',
-    fontSize: 32,
-    fontWeight: '900',
-    letterSpacing: 1.5,
+    color: Colors.light.primaryDark,
+    fontSize: 30,
+    fontWeight: '800',
+    letterSpacing: 0.2,
     textAlign: 'center',
   },
   title: {
-    color: '#172b6e',
+    color: Colors.light.text,
     fontSize: 25,
     fontWeight: '700',
     marginTop: 8,
   },
   subtitle: {
-    color: '#68738d',
+    color: Colors.light.textMuted,
     fontSize: 14,
     marginTop: 8,
     textAlign: 'center',
   },
   form: {
-    backgroundColor: '#fff',
-    borderRadius: 18,
+    backgroundColor: Colors.light.surface,
+    borderRadius: 24,
     padding: 22,
-    shadowColor: '#172b6e',
+    shadowColor: Colors.light.primaryDark,
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.08,
     shadowRadius: 16,
     elevation: 4,
     borderWidth: 1,
-    borderColor: '#edf0f8',
+    borderColor: Colors.light.border,
   },
   label: {
-    color: '#26365f',
+    color: Colors.light.text,
     fontSize: 14,
     fontWeight: '600',
     marginBottom: 8,
@@ -287,14 +288,14 @@ const LIPstyles = StyleSheet.create({
   input: {
     minHeight: 50,
     borderWidth: 1,
-    borderColor: '#dce2ef',
-    borderRadius: 12,
+    borderColor: Colors.light.border,
+    borderRadius: 14,
     paddingHorizontal: 14,
-    color: '#202a44',
-    backgroundColor: '#fbfcff',
+    color: Colors.light.text,
+    backgroundColor: Colors.light.background,
   },
   note: {
-    color: '#68738d',
+    color: Colors.light.textMuted,
     fontSize: 12,
     marginTop: 7,
   },
@@ -302,10 +303,10 @@ const LIPstyles = StyleSheet.create({
     minHeight: 52,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#172b6e',
-    borderRadius: 12,
+    backgroundColor: Colors.light.primary,
+    borderRadius: 15,
     marginTop: 24,
-    shadowColor: '#172b6e',
+    shadowColor: Colors.light.primaryDark,
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.18,
     shadowRadius: 10,
@@ -325,7 +326,7 @@ const LIPstyles = StyleSheet.create({
     paddingBottom: 4,
   },
   toggleText: {
-    color: '#172b6e',
+    color: Colors.light.primaryDark,
     fontSize: 14,
     fontWeight: '600',
   },

@@ -1,9 +1,13 @@
 import { Stack } from 'expo-router';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
+import Colors from '@/constants/Colors';
+import { Platform } from 'react-native';
+import { NavigationBar } from 'expo-navigation-bar';
 
 export default function RootLayout() {
   return (
     <AuthProvider>
+      {Platform.OS === 'android' ? <NavigationBar hidden /> : null}
       <RootNavigator />
     </AuthProvider>
   );
@@ -24,8 +28,9 @@ function RootNavigator() {
           name="edit1"
           options={{
             title: 'Editar Endereço',
-            headerStyle: { backgroundColor: '#172b6e' },
-            headerTintColor: '#ffffff',
+            headerStyle: { backgroundColor: Colors.light.background },
+            headerTintColor: Colors.light.primaryDark,
+            headerTitleStyle: { color: Colors.light.text, fontWeight: '700' },
             headerTitleAlign: 'center',
             headerShown: true,
           }}
@@ -34,8 +39,9 @@ function RootNavigator() {
           name="edit2"
           options={{
             title: 'Editar Telefone',
-            headerStyle: { backgroundColor: '#172b6e' },
-            headerTintColor: '#ffffff',
+            headerStyle: { backgroundColor: Colors.light.background },
+            headerTintColor: Colors.light.primaryDark,
+            headerTitleStyle: { color: Colors.light.text, fontWeight: '700' },
             headerTitleAlign: 'center',
             headerShown: true,
           }}
@@ -44,8 +50,9 @@ function RootNavigator() {
           name="edit3"
           options={{
             title: 'Editar Pagamento',
-            headerStyle: { backgroundColor: '#172b6e' },
-            headerTintColor: '#ffffff',
+            headerStyle: { backgroundColor: Colors.light.background },
+            headerTintColor: Colors.light.primaryDark,
+            headerTitleStyle: { color: Colors.light.text, fontWeight: '700' },
             headerTitleAlign: 'center',
             headerShown: true,
           }}

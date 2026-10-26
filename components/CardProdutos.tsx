@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LIPaddProductToCart } from '@/constants/cart';
 import { showAlert } from '@/lib/alert';
+import Colors from '@/constants/Colors';
 
 interface LIPCardProdutosProps {
   LIPid: string;
@@ -51,26 +52,28 @@ export default function LIPCardProdutos(props: LIPCardProdutosProps) {
 }
 const LIPstyles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF', 
-    borderRadius: 15,          
+    backgroundColor: Colors.light.surface,
+    borderRadius: 18,
     padding: 10,
     margin: 10,               
-    elevation: 4,
+    elevation: 2,
     width:'43%',
-    shadowColor: '#000',
+    shadowColor: Colors.light.primaryDark,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: Colors.light.border,
   },
   foto: {
     width: '100%',
     height: 140,
-    borderRadius: 10,
+    borderRadius: 12,
   },
   nomeproduto: {
     textAlign: "center",
-    color: '#333333',       
-    fontSize: 10,            
+    color: Colors.light.text,
+    fontSize: 13,
     fontWeight: '600',       
     marginTop: 8,
   },
@@ -82,20 +85,20 @@ const LIPstyles = StyleSheet.create({
     marginTop: 12,
   },
   precoproduto: {
-    color: '#feb600',        
-    fontSize: 18,
+    color: Colors.light.primaryDark,
+    fontSize: 15,
     fontWeight: 'bold',
   },
   botao: {
-    backgroundColor: '#004cff',
+    backgroundColor: Colors.light.sage,
     width: 34,
     height: 34,
-    borderRadius: 10,           
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textobotao: {
-    color: '#FFFFFF',
+    color: Colors.light.primaryDark,
     fontSize: 22,
     fontWeight: 'bold',
     lineHeight: 24,           

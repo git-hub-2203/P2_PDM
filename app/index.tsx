@@ -1,6 +1,7 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { Redirect, type Href } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
+import Colors from '@/constants/Colors';
 
 export default function IndexScreen() {
   const { session: LIPsession, isLoading: LIPisLoading } = useAuth();
@@ -8,7 +9,7 @@ export default function IndexScreen() {
   if (LIPisLoading) {
     return (
       <View style={LIPstyles.container}>
-        <ActivityIndicator size="large" color="#172b6e" />
+        <ActivityIndicator size="large" color={Colors.light.primary} />
       </View>
     );
   }
@@ -22,6 +23,6 @@ const LIPstyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.background,
   },
 });

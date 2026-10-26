@@ -8,6 +8,7 @@ import { useFocusEffect } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
 import { LIPobterPerfil } from '@/constants/userStore';
 import { LIPcarregarFotoPerfil } from '@/constants/profilePhoto';
+import Colors from '@/constants/Colors';
 
 export default function App() {
   const { session: LIPsession } = useAuth();
@@ -108,6 +109,10 @@ export default function App() {
         style={{ flex: 1, width: '100%' }}
         contentContainerStyle={LIPstyles.catalogo}
       >
+        <View style={LIPstyles.catalogoIntro}>
+          <Text style={LIPstyles.catalogoTitulo}>Novidades para os pequenos</Text>
+          <Text style={LIPstyles.catalogoSubtitulo}>Conforto e carinho em cada peça</Text>
+        </View>
         {LIPprodutosVisiveis.length > 0 ? (
           LIPprodutosVisiveis.map((item) => (
             <CardProdutos
@@ -132,13 +137,17 @@ export default function App() {
 const LIPstyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.background,
   },
   perfil: {
     flexDirection: 'row',
-    backgroundColor: '#353535',
+    backgroundColor: Colors.light.sage,
     width: '100%',
-    height: '20%',
+    height: '21%',
+    minHeight: 145,
+    maxHeight: 190,
+    borderBottomLeftRadius: 28,
+    borderBottomRightRadius: 28,
   },
   containerPesquisa: {
     flexDirection: 'row',
@@ -151,12 +160,14 @@ const LIPstyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.surface,
     height: 50,
     borderRadius: 12,
     paddingHorizontal: 15,
     marginRight: 10,
-    elevation: 4,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: Colors.light.border,
   },
   iconeBusca: {
     marginRight: 8,
@@ -165,18 +176,18 @@ const LIPstyles = StyleSheet.create({
     flex: 1,
   },
   botaoFiltro: {
-    backgroundColor: '#1b1fed',
+    backgroundColor: Colors.light.primary,
     width: 50,
     height: 50,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 4,
+    elevation: 3,
   },
   semResultados: {
     width: '100%',
     marginTop: 24,
-    color: '#616b74',
+    color: Colors.light.textMuted,
     textAlign: 'center',
   },
   catalogo: {
@@ -184,14 +195,30 @@ const LIPstyles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     paddingHorizontal: 15,
-    paddingTop: 20,
+    paddingTop: 18,
     paddingBottom: 40,
+  },
+  catalogoIntro: {
+    width: '100%',
+    paddingHorizontal: 5,
+    marginBottom: 4,
+  },
+  catalogoTitulo: {
+    color: Colors.light.text,
+    fontSize: 19,
+    fontWeight: '700',
+  },
+  catalogoSubtitulo: {
+    color: Colors.light.textMuted,
+    fontSize: 13,
+    marginTop: 4,
   },
   areahome: {
     height: '100%',
     width: '70%',
     justifyContent: 'center',
-    padding: 15,
+    paddingHorizontal: 20,
+    paddingTop: 10,
   },
   areafoto: {
     height: '100%',
@@ -200,16 +227,20 @@ const LIPstyles = StyleSheet.create({
     alignItems: 'center',
   },
   endereco: {
-    color: '#fff',
+    color: Colors.light.text,
     fontSize: 15,
+    fontWeight: '600',
   },
   texto: {
-    color: '#ababab',
-    fontSize: 10,
+    color: Colors.light.textMuted,
+    fontSize: 11,
+    marginBottom: 4,
   },
   fotoperfil: {
     width: 70,
     height: 70,
     borderRadius: 35,
+    borderWidth: 3,
+    borderColor: Colors.light.surface,
   },
 });

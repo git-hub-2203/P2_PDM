@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
 import { LIPatualizarPerfil, LIPobterPerfil } from '@/constants/userStore';
+import Colors from '@/constants/Colors';
 
 export default function LIPedit1() {
   const { session: LIPsession } = useAuth();
@@ -51,7 +52,7 @@ export default function LIPedit1() {
     <View style={LIPstyles.containersuperior}>
       <View style={LIPstyles.xd2}>
         <Text style={LIPstyles.texto}>Endereço Atual:</Text>
-        <Text style={{ flex: 1, flexWrap: 'wrap' }}>{LIPendatual}</Text>
+        <Text style={LIPstyles.valorAtual}>{LIPendatual || 'Nenhum endereço salvo'}</Text>
       </View>
       <View style={LIPstyles.xd2}>
         <Text style={LIPstyles.texto}>Alterar endereço:</Text>
@@ -60,7 +61,8 @@ export default function LIPedit1() {
           value={LIPendnovo}
           placeholder="Digite o novo endereço aqui."
           multiline={true}
-          style={{ flex: 1 }}
+          style={LIPstyles.input}
+          placeholderTextColor={Colors.light.textMuted}
         />
       </View>
       <View style={LIPstyles.botaoxd}>
@@ -74,32 +76,54 @@ export default function LIPedit1() {
 
 const LIPstyles = StyleSheet.create({
   texto: {
-    fontSize: 15,
-    marginRight: 30,
+    fontSize: 14,
+    color: Colors.light.text,
+    fontWeight: '600',
+    marginBottom: 8,
   },
   containersuperior: {
+    flex: 1,
     flexDirection: 'column',
+    backgroundColor: Colors.light.background,
+    padding: 20,
   },
   xd2: {
-    flexDirection: 'row',
-    margin: 30,
-    alignItems: 'center',
+    flexDirection: 'column',
+    backgroundColor: Colors.light.surface,
+    marginBottom: 16,
+    padding: 18,
+    borderRadius: 18,
+    borderWidth: 1,
+    borderColor: Colors.light.border,
+  },
+  valorAtual: {
+    color: Colors.light.textMuted,
+    fontSize: 15,
+    lineHeight: 21,
+  },
+  input: {
+    minHeight: 54,
+    borderWidth: 1,
+    borderColor: Colors.light.border,
+    borderRadius: 12,
+    paddingHorizontal: 13,
+    paddingVertical: 12,
+    color: Colors.light.text,
+    backgroundColor: Colors.light.background,
   },
   botao: {
-    flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor: '#172b6e',
+    alignItems: 'center',
+    backgroundColor: Colors.light.primary,
     height: 50,
-    width: 200,
-    borderRadius: 6,
+    width: '100%',
+    borderRadius: 14,
   },
   textobotao: {
     color: '#fff',
-    margin: 10,
     fontWeight: 'bold',
   },
   botaoxd: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    marginTop: 6,
   },
 });

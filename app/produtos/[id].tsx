@@ -6,6 +6,7 @@ import FallbackIcon from '@/components/FallbackIcon';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LIPaddProductToCart } from '@/constants/cart';
 import { showAlert } from '@/lib/alert';
+import Colors from '@/constants/Colors';
 
 export default function LIPProductDetail() {
   const { id: LIPid } = useLocalSearchParams();
@@ -45,11 +46,11 @@ export default function LIPProductDetail() {
           <Image source={{ uri: LIPprodutoAtual.LIPimage }} style={LIPstyles.imagemProduto} />
           
           <TouchableOpacity style={LIPstyles.botaoVoltar} onPress={() => router.back()}>
-            <FallbackIcon name="left" size={20} color="#000" />
+            <FallbackIcon name="left" size={20} color={Colors.light.text} />
           </TouchableOpacity>
 
           <TouchableOpacity style={LIPstyles.botaoFavorito}>
-            <FallbackIcon name="heart-outline" size={22} color="#000" />
+            <FallbackIcon name="heart-outline" size={22} color={Colors.light.primaryDark} />
           </TouchableOpacity>
         </View>
 
@@ -61,7 +62,7 @@ export default function LIPProductDetail() {
             </View>
 
             <View style={LIPstyles.containerAvaliacao}>
-              <FallbackIcon name="star" size={18} color="#FF9500" />
+              <FallbackIcon name="star" size={18} color={Colors.light.primary} />
               <Text style={LIPstyles.textoAvaliacao}>4.8 <Text style={LIPstyles.textoQtdAvaliacao}>(230)</Text></Text>
             </View>
           </View>
@@ -113,7 +114,7 @@ export default function LIPProductDetail() {
 const LIPstyles = StyleSheet.create({
   containerGeral: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.background,
   },
   containerScroll: {
     flex: 1,
@@ -125,14 +126,16 @@ const LIPstyles = StyleSheet.create({
   },
   textoErro: {
     fontSize: 18,
-    color: 'red',
+    color: Colors.light.primaryDark,
   },
   containerImagem: {
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 40,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.sage,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
   imagemProduto: {
     width: 260,
@@ -144,7 +147,7 @@ const LIPstyles = StyleSheet.create({
     position: 'absolute',
     top: 50,
     left: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: Colors.light.surface,
     padding: 10,
     borderRadius: 20,
   },
@@ -152,7 +155,7 @@ const LIPstyles = StyleSheet.create({
     position: 'absolute',
     top: 50,
     right: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: Colors.light.surface,
     padding: 10,
     borderRadius: 20,
   },
@@ -167,11 +170,11 @@ const LIPstyles = StyleSheet.create({
   nomeProduto: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#1a1a1a',
+    color: Colors.light.text,
   },
   subtituloProduto: {
     fontSize: 14,
-    color: '#888',
+    color: Colors.light.textMuted,
     marginTop: 4,
   },
   containerAvaliacao: {
@@ -185,23 +188,23 @@ const LIPstyles = StyleSheet.create({
   },
   textoQtdAvaliacao: {
     fontSize: 12,
-    color: '#888',
+    color: Colors.light.textMuted,
     fontWeight: 'normal',
   },
   divisoria: {
     height: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: Colors.light.border,
     marginVertical: 15,
   },
   tituloSecao: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1a1a1a',
+    color: Colors.light.text,
     marginBottom: 8,
   },
   textoDescricao: {
     fontSize: 14,
-    color: '#666',
+    color: Colors.light.textMuted,
     lineHeight: 20,
     marginBottom: 20,
   },
@@ -215,22 +218,22 @@ const LIPstyles = StyleSheet.create({
     marginHorizontal: 5,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    borderColor: Colors.light.border,
     borderRadius: 12,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.light.surface,
   },
   caixaTamanhoSelecionado: {
-    borderColor: '#172b6e',
-    backgroundColor: '#f0f4ff',
+    borderColor: Colors.light.primary,
+    backgroundColor: Colors.light.surfaceMuted,
   },
   textoTamanho: {
     fontSize: 16,
-    color: '#555',
+    color: Colors.light.textMuted,
     fontWeight: '600',
   },
   textoTamanhoSelecionado: {
-    color: '#172b6e',
+    color: Colors.light.primaryDark,
     fontWeight: 'bold',
   },
   barraInferior: {
@@ -240,20 +243,20 @@ const LIPstyles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
     borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-    backgroundColor: '#fff',
+    borderTopColor: Colors.light.border,
+    backgroundColor: Colors.light.surface,
   },
   labelPreco: {
     fontSize: 12,
-    color: '#888',
+    color: Colors.light.textMuted,
   },
   valorPreco: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#172b6e',
+    color: Colors.light.primaryDark,
   },
   botaoComprar: {
-    backgroundColor: '#172b6e',
+    backgroundColor: Colors.light.primary,
     paddingVertical: 14,
     paddingHorizontal: 35,
     borderRadius: 16,

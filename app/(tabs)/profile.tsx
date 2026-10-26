@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Image, Text, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, Text, View, ScrollView } from 'react-native';
 import { showAlert } from '@/lib/alert';
 import FallbackIcon from '@/components/FallbackIcon';
 import { useState, useCallback } from 'react';
@@ -93,10 +93,14 @@ export default function TabThreeScreenLIP() {
   };
 
   return (
-    <View style={LIPstyles.caixa1}>
+    <ScrollView
+      style={LIPstyles.caixa1}
+      contentContainerStyle={LIPstyles.conteudo}
+      showsVerticalScrollIndicator={false}
+    >
       <View style={LIPstyles.caixa2}>
         <TouchableOpacity
-          style={LIPstyles.perfil}
+          style={LIPstyles.avatarWrap}
           onPress={LIPescolherfoto}
           accessibilityRole="button"
           accessibilityLabel="Alterar foto do perfil"
@@ -108,128 +112,179 @@ export default function TabThreeScreenLIP() {
       </View>
 
       <View style={LIPstyles.caixa3}>
-        <View style={LIPstyles.caixaItem}>
-          <FallbackIcon name="map" size={24} color="black" />
-          <Text style={LIPstyles.texto}>Endereço</Text>
-          <Text style={LIPstyles.detalheItem} numberOfLines={1}>
-            {LIPperfilUsuario?.endereco || 'Não informado'}
-          </Text>
-          <View style={LIPstyles.padding1}>
-            <TouchableOpacity onPress={() => LIProuter.push('/edit1')}>
-              <FallbackIcon name="caret-right" size={24} color="black" />
-            </TouchableOpacity>
+        <Text style={LIPstyles.tituloSecao}>Minha conta</Text>
+        <TouchableOpacity
+          style={LIPstyles.caixaItem}
+          onPress={() => LIProuter.push('/edit1')}
+          accessibilityRole="button"
+          accessibilityLabel="Editar endereço"
+        >
+          <View style={LIPstyles.iconeItem}>
+            <FallbackIcon name="map" size={21} color={Colors.light.primaryDark} />
           </View>
-        </View>
+          <View style={LIPstyles.infoItem}>
+            <Text style={LIPstyles.texto}>Endereço</Text>
+            <Text style={LIPstyles.detalheItem} numberOfLines={1}>
+              {LIPperfilUsuario?.endereco || 'Não informado'}
+            </Text>
+          </View>
+          <FallbackIcon name="caret-right" size={20} color={Colors.light.textMuted} />
+        </TouchableOpacity>
 
-        <View style={LIPstyles.caixaItem}>
-          <FallbackIcon name="phone" size={24} color="black" />
-          <Text style={LIPstyles.texto}>Telefone</Text>
-          <Text style={LIPstyles.detalheItem} numberOfLines={1}>
-            {LIPperfilUsuario?.telefone || 'Não informado'}
-          </Text>
-          <View style={LIPstyles.padding2}>
-            <TouchableOpacity onPress={() => LIProuter.push('/edit2')}>
-              <FallbackIcon name="caret-right" size={24} color="black" />
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={LIPstyles.caixaItem}
+          onPress={() => LIProuter.push('/edit2')}
+          accessibilityRole="button"
+          accessibilityLabel="Editar telefone"
+        >
+          <View style={LIPstyles.iconeItem}>
+            <FallbackIcon name="phone" size={21} color={Colors.light.primaryDark} />
           </View>
-        </View>
+          <View style={LIPstyles.infoItem}>
+            <Text style={LIPstyles.texto}>Telefone</Text>
+            <Text style={LIPstyles.detalheItem} numberOfLines={1}>
+              {LIPperfilUsuario?.telefone || 'Não informado'}
+            </Text>
+          </View>
+          <FallbackIcon name="caret-right" size={20} color={Colors.light.textMuted} />
+        </TouchableOpacity>
 
-        <View style={LIPstyles.caixaItem}>
-          <FallbackIcon name="credit-card" size={24} color="black" />
-          <Text style={LIPstyles.texto}>Pagamento</Text>
-          <Text style={LIPstyles.detalheItem}>
-            {LIPperfilUsuario?.cartaoFinal
-              ? `•••• ${LIPperfilUsuario.cartaoFinal}`
-              : 'Não informado'}
-          </Text>
-          <View style={LIPstyles.padding3}>
-            <TouchableOpacity onPress={() => LIProuter.push('/edit3')}>
-              <FallbackIcon name="caret-right" size={24} color="black" />
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={[LIPstyles.caixaItem, LIPstyles.ultimoItem]}
+          onPress={() => LIProuter.push('/edit3')}
+          accessibilityRole="button"
+          accessibilityLabel="Editar pagamento"
+        >
+          <View style={LIPstyles.iconeItem}>
+            <FallbackIcon name="credit-card" size={21} color={Colors.light.primaryDark} />
           </View>
-        </View>
+          <View style={LIPstyles.infoItem}>
+            <Text style={LIPstyles.texto}>Pagamento</Text>
+            <Text style={LIPstyles.detalheItem} numberOfLines={1}>
+              {LIPperfilUsuario?.cartaoFinal
+                ? `•••• ${LIPperfilUsuario.cartaoFinal}`
+                : 'Não informado'}
+            </Text>
+          </View>
+          <FallbackIcon name="caret-right" size={20} color={Colors.light.textMuted} />
+        </TouchableOpacity>
 
         <TouchableOpacity style={LIPstyles.botaoSair} onPress={LIPsair}>
           <Text style={LIPstyles.textoBotaoSair}>Sair da conta</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const LIPstyles = StyleSheet.create({
   caixa1: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
     backgroundColor: Colors.light.background,
   },
+  conteudo: {
+    flexGrow: 1,
+    paddingBottom: 28,
+  },
   caixa2: {
-    backgroundColor: Colors.light.tint,
-    height: '40%',
+    backgroundColor: Colors.light.sage,
+    minHeight: 235,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 26,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
   caixa3: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    paddingHorizontal: 20,
-    width: '100%',
-    height: '60%',
-    paddingTop: 20,
+    backgroundColor: Colors.light.surface,
+    marginHorizontal: 18,
+    marginTop: 22,
+    paddingHorizontal: 18,
+    paddingTop: 18,
+    paddingBottom: 20,
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: Colors.light.border,
+    shadowColor: Colors.light.primaryDark,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 2,
   },
   perfil: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: '#ffffff',
+    width: 92,
+    height: 92,
+    borderRadius: 46,
+    backgroundColor: Colors.light.surface,
+  },
+  avatarWrap: {
+    width: 102,
+    height: 102,
+    borderRadius: 51,
+    padding: 5,
+    backgroundColor: Colors.light.surface,
+    marginBottom: 10,
   },
   texto: {
     color: Colors.light.text,
-    fontSize: 18,
-    padding: 10,
-    marginBottom: 3,
+    fontSize: 15,
     fontWeight: '600',
   },
   textonome: {
-    color: '#ffffff',
+    color: Colors.light.text,
     fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 15,
+    fontWeight: '700',
+    marginTop: 5,
   },
   textoemail: {
-    color: '#c0c8e0',
-    fontSize: 15,
-    marginTop: 5,
+    color: Colors.light.textMuted,
+    fontSize: 14,
+    marginTop: 4,
+  },
+  tituloSecao: {
+    color: Colors.light.text,
+    fontSize: 17,
+    fontWeight: '700',
+    marginBottom: 4,
   },
   caixaItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingBottom: 10,
-    width: '100%',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.light.border,
+    gap: 12,
+  },
+  iconeItem: {
+    width: 42,
+    height: 42,
+    borderRadius: 14,
+    backgroundColor: Colors.light.surfaceMuted,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  infoItem: {
+    flex: 1,
   },
   detalheItem: {
-    color: '#606879',
+    color: Colors.light.textMuted,
     fontSize: 13,
-    flexShrink: 1,
-    marginLeft: 'auto',
-    marginRight: 12,
+    marginTop: 4,
   },
-  padding1: { marginLeft: 'auto' },
-  padding2: { marginLeft: 'auto' },
-  padding3: { marginLeft: 'auto' },
+  ultimoItem: {
+    borderBottomWidth: 0,
+  },
   botaoSair: {
-    alignSelf: 'center',
-    backgroundColor: '#172b6e',
-    paddingHorizontal: 28,
-    paddingVertical: 13,
-    borderRadius: 8,
-    marginTop: 24,
+    alignItems: 'center',
+    backgroundColor: Colors.light.surfaceMuted,
+    paddingVertical: 14,
+    borderRadius: 14,
+    marginTop: 16,
   },
   textoBotaoSair: {
-    color: '#fff',
-    fontSize: 15,
+    color: Colors.light.primaryDark,
+    fontSize: 14,
     fontWeight: '600',
   },
 });

@@ -1,20 +1,29 @@
 import { Tabs } from 'expo-router';
 import FallbackIcon from '@/components/FallbackIcon';
+import Colors from '@/constants/Colors';
 
 export default function TabLayoutLIP() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#ffffff',
-        tabBarInactiveTintColor: '#8a99c0',
+        tabBarActiveTintColor: Colors.light.primaryDark,
+        tabBarInactiveTintColor: Colors.light.textMuted,
         headerTitleAlign: 'center',
-        headerTintColor: '#ffffff',
+        headerTintColor: Colors.light.primaryDark,
         headerStyle: {
-          backgroundColor: '#172b6e',
+          backgroundColor: Colors.light.background,
+        },
+        headerTitleStyle: {
+          color: Colors.light.text,
+          fontWeight: '700',
         },
         tabBarStyle: {
-          backgroundColor: '#172b6e',
-          borderTopWidth: 0,
+          backgroundColor: Colors.light.surface,
+          borderTopColor: Colors.light.border,
+          borderTopWidth: 1,
+          height: 66,
+          paddingTop: 7,
+          paddingBottom: 8,
         },
       }}
     >
@@ -24,7 +33,11 @@ export default function TabLayoutLIP() {
           title: 'Catálogo',
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <FallbackIcon name="home" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
+            <FallbackIcon
+              name="home"
+              size={24}
+              color={typeof color === 'string' ? color : Colors.light.primaryDark}
+            />
           ),
         }}
       />
@@ -34,7 +47,11 @@ export default function TabLayoutLIP() {
         options={{
           title: 'Carrinho',
           tabBarIcon: ({ color }) => (
-            <FallbackIcon name="shopping-cart" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
+            <FallbackIcon
+              name="shopping-cart"
+              size={24}
+              color={typeof color === 'string' ? color : Colors.light.primaryDark}
+            />
           ),
         }}
       />
@@ -44,7 +61,11 @@ export default function TabLayoutLIP() {
         options={{
           title: 'Perfil',
           tabBarIcon: ({ color }) => (
-            <FallbackIcon name="person" size={24} color={typeof color === 'string' ? color : '#ffffff'} />
+            <FallbackIcon
+              name="person"
+              size={24}
+              color={typeof color === 'string' ? color : Colors.light.primaryDark}
+            />
           ),
         }}
       />
