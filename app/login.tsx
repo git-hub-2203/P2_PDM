@@ -1,5 +1,7 @@
+import Colors from '@/constants/Colors';
 import { LIPregistrarUsuario, LIPvalidarLogin } from '@/constants/userStore';
 import { useAuth } from '@/contexts/AuthContext';
+import { showAlert } from '@/lib/alert';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import {
@@ -13,8 +15,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { showAlert } from '@/lib/alert';
-import Colors from '@/constants/Colors';
 
 export default function LoginScreen() {
   const { signIn: LIPsignIn } = useAuth();
@@ -27,7 +27,7 @@ export default function LoginScreen() {
   const [LIPcartao, setLIPcartao] = useState('');
   const [LIPenviando, setLIPenviando] = useState(false);
 
-  const LIPenviar = async () => {
+  const LIPenviar = () => {
     const LIPemailLimpo = LIPemail.trim().toLowerCase();
     if (!LIPemailLimpo.includes('@') || LIPsenha.length < 6) {
       showAlert('Confira os dados', 'Informe um e-mail válido e uma senha com pelo menos 6 caracteres.');
@@ -51,9 +51,8 @@ export default function LoginScreen() {
     }
 
     setLIPenviando(true);
-    try {
-      if (LIPmodoCadastro) {
-        await LIPregistrarUsuario(
+    const LIPoperacao = LIPmodoCadastro
+      ? LIPregistrarUsuario(
           {
             nome: LIPnome.trim(),
             email: LIPemailLimpo,
@@ -62,22 +61,33 @@ export default function LoginScreen() {
             cartaoFinal: LIPcartaoFinal,
           },
           LIPsenha
-        );
-      } else if (!(await LIPvalidarLogin(LIPemailLimpo, LIPsenha))) {
-        showAlert('Não foi possível entrar', 'E-mail ou senha incorretos.');
-        return;
-      }
+        ).then(() => true)
+      : LIPvalidarLogin(LIPemailLimpo, LIPsenha).then((LIPusuario) => {
+          if (!LIPusuario) {
+            showAlert('Não foi possível entrar', 'E-mail ou senha incorretos.');
+            return false;
+          }
+          return true;
+        });
 
-      await LIPsignIn(LIPemailLimpo);
-      router.replace('/(tabs)');
-    } catch (error) {
-      showAlert(
-        'Erro',
-        error instanceof Error ? error.message : 'Não foi possível concluir a operação.'
-      );
-    } finally {
-      setLIPenviando(false);
-    }
+    LIPoperacao
+      .then((LIPautenticado) => {
+        if (!LIPautenticado) {
+          return;
+        }
+        return LIPsignIn(LIPemailLimpo).then(() => {
+          router.replace('/(tabs)');
+        });
+      })
+      .catch((error: unknown) => {
+        showAlert(
+          'Erro',
+          error instanceof Error ? error.message : 'Não foi possível concluir a operação.'
+        );
+      })
+      .finally(() => {
+        setLIPenviando(false);
+      });
   };
 
   return (
