@@ -28,19 +28,19 @@ export default function LoginScreen() {
   const [LIPenviando, setLIPenviando] = useState(false);
 
   const LIPenviar = async () => {
-    const LIPemailLimpo = LIPemail.trim().toLocaleLowerCase();
+    const LIPemailLimpo = LIPemail.trim().toLowerCase();
     if (!LIPemailLimpo.includes('@') || LIPsenha.length < 6) {
       showAlert('Confira os dados', 'Informe um e-mail válido e uma senha com pelo menos 6 caracteres.');
       return;
     }
 
+    const LIPcartaoFinal = LIPcartao.replace(/\D/g, '').slice(-4);
     if (LIPmodoCadastro) {
-      const LIPultimosDigitos = LIPcartao.replace(/\D/g, '').slice(-4);
       if (
         !LIPnome.trim() ||
         !LIPendereco.trim() ||
-        LIPtelefone.replace(/\D/g, '').length < 8 ||
-        LIPultimosDigitos.length !== 4
+        !LIPtelefone.trim() ||
+        LIPcartaoFinal.length !== 4
       ) {
         showAlert(
           'Dados incompletos',
@@ -59,22 +59,18 @@ export default function LoginScreen() {
             email: LIPemailLimpo,
             endereco: LIPendereco.trim(),
             telefone: LIPtelefone.trim(),
-            cartaoFinal: LIPcartao.replace(/\D/g, '').slice(-4),
+            cartaoFinal: LIPcartaoFinal,
           },
           LIPsenha
         );
-      } else {
-        const LIPusuario = await LIPvalidarLogin(LIPemailLimpo, LIPsenha);
-        if (!LIPusuario) {
-          showAlert('Não foi possível entrar', 'E-mail ou senha incorretos.');
-          return;
-        }
+      } else if (!(await LIPvalidarLogin(LIPemailLimpo, LIPsenha))) {
+        showAlert('Não foi possível entrar', 'E-mail ou senha incorretos.');
+        return;
       }
 
       await LIPsignIn(LIPemailLimpo);
       router.replace('/(tabs)');
     } catch (error) {
-      console.error('Erro ao autenticar usuário:', error);
       showAlert(
         'Erro',
         error instanceof Error ? error.message : 'Não foi possível concluir a operação.'
